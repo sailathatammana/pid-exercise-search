@@ -11,17 +11,78 @@ public class Search {
 
     public static int linearSearch(int[] array, int value) {
         // TODO Implement linear search
-        return 0;
+        for(int i = 0; i < array.length; i++ ){
+            if(array[i] == value){
+                return i;
+            }
+        }
+        return -1;
     }
 
     public static int binarySearch(int[] array, int value) {
         // TODO Implement iterative binary search
-        return 0;
-    }
+        int low = 0;
+        int high = array.length - 1;
+        while (low <= high){
+            int mid = (low + high) / 2;
+            if (array[mid] < value) {
+                for (low = mid + 1; low <= high; low++) {
+                    if (array[low] == value)
+                        return low;
+                }
+            } else if (array[mid] > value) {
+                for (high = mid - 1; high >= low; high--) {
+                    if (array[high] == value)
+                        return high;
+                }
+
+            } else
+                return mid;
+        }
+        return -1;
+        }
+
 
     public static int binarySearchRecursive(int[] array, int value) {
         // TODO Implement recursive binary search
-        return 0;
+        return binarySearchRecHelper(array,0,array.length-1,value);
     }
 
+    public static int binarySearchRecHelper(int array[], int low,
+                     int high, int value)
+    {
+        //Restrict the boundary of right index
+        // and the left index to prevent
+        // overflow of indices.
+        if (high >= low && low<array.length) {
+
+            int mid = (low + high) / 2;
+
+            // If the element is present
+            // at the middle itself
+            if (array[mid] == value)
+                return mid;
+
+            // If element is smaller than mid, then it can only
+            // be present in left subarray
+            if (array[mid] > value)
+                return binarySearchRecHelper(array, low, mid - 1, value);
+
+            // Else the element can only be present in right
+            // subarray
+            return binarySearchRecHelper(array, mid + 1, high, value);
+        }
+        // We reach here when element is not present in array
+        return -1;
+    }
+
+
+        public static void main(String[] args){
+        Search search = new Search();
+        int array[] = {7,2,10,88,16,78,34,5};
+        //System.out.println("The element is at index :" + search.linearSearch(array,78));
+        int array1[] = {7,8,10,45,78,99};
+        //System.out.println("The element is at index :" + search.binarySearch(array1,78));
+            System.out.println("The element is at index :" + search.binarySearchRecursive(array1,99));
+    }
 }
