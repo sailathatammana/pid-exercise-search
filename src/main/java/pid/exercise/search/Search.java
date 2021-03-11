@@ -75,14 +75,4 @@ public class Search {
         // We reach here when element is not present in array
         return -1;
     }
-
-
-        public static void main(String[] args){
-        Search search = new Search();
-        int array[] = {7,2,10,88,16,78,34,5};
-        //System.out.println("The element is at index :" + search.linearSearch(array,78));
-        int array1[] = {7,8,10,45,78,99};
-        //System.out.println("The element is at index :" + search.binarySearch(array1,78));
-            System.out.println("The element is at index :" + search.binarySearchRecursive(array1,99));
-    }
 }
